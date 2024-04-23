@@ -1,0 +1,81 @@
+jenkins:
+
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+        # Roles Administrator set mapper roles admin from keycloak 
+        - assignments:
+          - "surust"
+          - "suchatph"
+          - "supichai"
+          - "pulia676"
+          - "nutsu676"
+          - "apinuk96"
+          - "thitc603"
+          description: "Jenkins Administrators"
+          name: "admin"
+          pattern: ".*"
+          permissions:
+          - "Overall/Administer"
+        
+        # Roles Users for Authenticated set mapper roles user from keycloak 
+        - assignments:
+          - "thira676"
+          description: "Jenkins Users"
+          name: "user"
+          pattern: ".*"
+          permissions:
+          - "Job/Move"
+          - "Job/Build"
+          - "Lockable Resources/View"
+          - "Credentials/Delete"
+          - "Credentials/ManageDomains"
+          - "Lockable Resources/Unlock"
+          - "View/Create"
+          - "Agent/Configure"
+          - "Job/Read"
+          - "Credentials/Update"
+          - "Agent/Create"
+          - "Job/Delete"
+          - "Agent/Build"
+          - "View/Configure"
+          - "Lockable Resources/Reserve"
+          - "Agent/Provision"
+          - "SCM/Tag"
+          - "Job/Create"
+          - "Job/Discover"
+          - "Credentials/View"
+          - "Agent/Connect"
+          - "Agent/Delete"
+          - "Run/Replay"
+          - "Agent/Disconnect"
+          - "Run/Delete"
+          - "Job/Cancel"
+          - "Overall/Read"
+          - "Run/Update"
+          - "Credentials/Create"
+          - "View/Delete"
+          - "Job/Configure"
+          - "Job/Workspace"
+          - "View/Read"
+
+  # Configuration for Openid (oic-auth) set from Keycloak.  
+  securityRealm:
+    oic:
+      clientId: "cd-matador"
+      clientSecret: "44cb2fa8-f18b-4bcb-8b00-e2940fb178fc"
+      authorizationEndpoint: "https://login.matador.ais.co.th/auth/realms/master/protocol/openid-connect/auth"
+      logoutEndpoint: "https://ci.matador.ais.co.th"
+      tokenEndpoint: "https://login.matador.ais.co.th/auth/realms/master/protocol/openid-connect/token"
+      userinfoEndpoint: "https://login.matador.ais.co.th/auth/realms/master/protocol/openid-connect/userinfo"
+      userClaimName: "preferred_username"
+      groupsClaimName: "preferred_groupname"
+      scopesOic: "openid profile email"
+      disableSslVerification: true
+      logoutFromOpenidProvider: true
+      escapeHatchEnabled: false
+
+  # Define Messages..
+  systemMessage: |+
+    Jenkins configured automatically by Jenkins Configuration as Code plugin.
